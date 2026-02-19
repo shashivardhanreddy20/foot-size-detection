@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoeFit AI Pro - Advanced Foot Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ShoeFit AI Pro</h1>
+            <p class="subtitle">Advanced Computer Vision Analysis</p>
+        </header>
+
+        <main>
+            <section class="intro">
+                <h2>Professional Foot Measurement with AI</h2>
+                <p>Our advanced computer vision technology automatically detects your foot and reference objects 
+                   (A4 paper, credit card, or coins) for millimeter-precision measurements. 
+                   All processing happens on your device for complete privacy.</p>
+                
+                <div class="reference-info">
+                    <span class="badge">Standard A4 sheet (210×297mm)</span>
+                </div>
+            </section>
+
+            <section class="upload-section">
+                <h3>Upload or Capture Foot Image</h3>
+                
+                <!-- Camera Preview -->
+                <div id="cameraContainer" style="display: none; margin-bottom: 20px;">
+                    <video id="cameraVideo" autoplay playsinline style="width: 100%; max-width: 600px; border-radius: 10px;"></video>
+                    <br>
+                    <button id="captureBtn" class="btn-primary" style="margin-top: 10px;">📸 Capture Photo</button>
+                    <button id="stopCameraBtn" class="btn-secondary" style="margin-top: 10px;">Stop Camera</button>
+                </div>
+                
+                <!-- Canvas for captured image -->
+                <canvas id="captureCanvas" style="display: none;"></canvas>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p>Drag and drop or click to browse</p>
+                        <span class="hint">Include a A4 Paper next to your foot</span>
+                        <br><br>
+                        <button id="startCameraBtn" class="btn-secondary">📷 Use Camera</button>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+            </section>
+
+            <section class="analysis-section" id="analysisSection" style="display: none;">
+                <div class="canvas-container">
+                    <canvas id="mainCanvas"></canvas>
+                    <canvas id="overlayCanvas"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <button id="processBtn" class="btn-primary">Analyze Foot</button>
+                    <button id="resetBtn" class="btn-secondary">Reset</button>
+                </div>
+
+                <div class="results" id="results" style="display: none;">
+                    <h4>Measurement Results</h4>
+                    <div class="measurement-grid">
+                        <div class="measurement-card">
+                            <span class="label">Foot Length</span>
+                            <span class="value" id="footLength">-- mm</span>
+                        </div>
+                        <div class="measurement-card">
+                            <span class="label">Foot Width</span>
+                            <span class="value" id="footWidth">-- mm</span>
+                        </div>
+                        <div class="measurement-card">
+                            <span class="label">Reference Object</span>
+                            <span class="value" id="refObject">--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tech-highlights">
+                <h3>Technical Highlights</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="tech-icon">🔍</div>
+                        <h4>OpenCV.js</h4>
+                        <p>Industry-standard computer vision library running directly in your browser</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">📐</div>
+                        <h4>Contour Detection</h4>
+                        <p>Advanced edge detection algorithms identify foot boundaries with precision</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">🎯</div>
+                        <h4>Perspective Correction</h4>
+                        <p>Automatic correction for camera angle and distance variations</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">⚡</div>
+                        <h4>Real-time Calibration</h4>
+                        <p>Scale calibration using everyday reference objects for mm accuracy</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="loading" class="loading-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading OpenCV...</p>
+        </div>
+    </div>
+
+    <!-- OpenCV.js -->
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="onOpenCvReady();"></script>
+    <script src="js/opencv-loader.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
